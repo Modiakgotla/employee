@@ -1,0 +1,21 @@
+[
+    {
+        "id":1,
+        "Fname": "Rethabile",
+        "Lname": "Magonare",
+        "email": "rethamagonare@hotmail.com"
+    },
+    {
+        "id":2,
+        "Fname": "David",
+        "Lname": "Khumalo",
+        "email": "dkhumalo@gmail.com"
+    },
+    {  "id":3,
+        "Fname": "Selena",
+        "Lname": "Mafahla",
+        "email": "selenam@gmail.com"
+
+    }
+  
+]
