@@ -1,4 +1,4 @@
-.App {
+/* .App {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -12,7 +12,9 @@ table{
   width: 50%;
   padding:5rem;
   position: absolute;
-  right: -500px;
+  right: -600px;
+  bottom: -300px;
+  right: -1200px;
 }
 
 
@@ -47,6 +49,82 @@ form td:last-child{
 
 form *{
   font-size: 25px;
+} */
+
+/* form {
+  background: red;
+  height: 100vh;
+  width: 100vw;
+} */
+table{
+  float: right;
+  border-collapse: collapse;
+ 
+  
 }
 
+.Data-Holder{
 
+  float: left;
+  background-color: transparent;
+  border: 2px solid #000;
+  border-radius: 30px;
+  box-shadow: #000;
+  width: 30vw;
+  margin-top: 10vh;
+  margin-left: 10vw;
+
+}
+
+h2{
+  text-align: center;
+  background-color: transparent;
+}
+
+.Data-Holder input{
+
+  width: 25vw;
+  margin-left: 1vw;
+  border: 1px solid #000; 
+  border-radius: 10px;
+
+}
+
+.Data-Holder button{
+
+  margin-left: 12vw;
+  margin-top: 15px;
+  background-color: #000;
+  color: white;
+  border-radius: 20px;
+  height: 30px;
+  width: 150px;
+  
+}
+
+.Data-Holder form{
+
+  background-color: transparent;
+  width: 25vw;
+  height: 22vh;
+
+}
+
+td {
+  border:1px solid black;
+  text-align: left;
+  padding:8px;
+  font-size:12px
+}
+
+th{
+  border:1px solid black;
+  text-align: left;
+  padding:8px;
+  font-size:20px;
+  background-color: blue;
+}
+
+td{
+  background-color: aqua;
+}

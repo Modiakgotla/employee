@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import '../src/components/css/App.css';
 import React, {useState , Fragment} from 'react';
-import data from './components/employee-data.json';
+import data from './employee-data.json';
 import AddEmployee from './components/AddEmployee';
 import {nanoid} from 'nanoid';
 import ReadList from './components/ReadList'
@@ -21,14 +21,14 @@ const App =()=> {
     Fname: "",
     Lname: "",
     email: "",
-  })
-
+  });
+                
   const [editListId, setEditListId] = useState(null);
 
   const handleAddFormChange = (event) => {
-    event.preeventDefault();
+    event.preventDefault();
 
-    const fieldName = event.target.getAttribute('name');
+    const fieldName = event.target.getAttribute("name");
     const fieldValue = event.target.value;
 
     const newFormData = {...addFormData};
@@ -49,7 +49,7 @@ const App =()=> {
       setEditFormData(newFormData)
     };
     const handleAddFormSubmit = (event) => {
-      event.preeventDefault();
+      event.preventDefault();
   
 
       const newlist = {
@@ -65,13 +65,21 @@ const App =()=> {
       event.preventDefault();
 
       const editedList = {
+        id: editListId,
         Fname: editFormData.Fname,
         Lname: editFormData.Lname,
         email: editFormData.email,
-      }
+      };
 
-      const newLists = [...contacts]
-    }
+      const newLists = [...lists];
+
+      const index = lists.findIndex((list)=>list.id===editListId);
+
+      newLists[index] = editedList;
+
+      setLists(newLists);
+      setEditListId(null);
+    };
 
       const EditClick = (event, list) => {
         event.preventDefault();
@@ -84,65 +92,78 @@ const App =()=> {
         };
         setEditFormData(formValues);
       }
-  };
+  ;
+  const CancelClick =() => {
+    setEditListId(null);
+  }
+  const DeleteClick =(listId) =>{
+    const newLists =[...lists];
 
+    const index = lists.findIndex((list) =>list.id ===listId);
+
+    newLists.splice(index,1);
+
+    setLists(newLists);
+  }
   return (
     <div className="App">
-<AddEmployee />
-<div className="App">
-<from>
-
-<table>
-  <thead>
+ 
     
+    <form onSubmit={editFormSubmit}>
+
+    <table>
+    <thead>
+    <tr>
      <th>First Name</th>  
      <th>Last Name</th>  
      <th>Email</th> 
      <th>Actions</th>
-
+     </tr>
     
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
     {lists.map((list)=> (
       <Fragment>
         {editListId === list.id ? ( 
         <Edit editFormData={editFormData}
-        editFormChange={editFormChange}/>
-        ) : ( <ReadList list={list} 
-          EditClick={EditClick}/>
+        editFormChange={editFormChange}
+        CancelClick={CancelClick}/>
+        ) : ( 
+        <ReadList list={list} 
+          EditClick={EditClick}
+          DeleteClick={DeleteClick}/>
         )}
       </Fragment>
       
     
       ))}</tbody>
-</table>
-</from>
+      </table>
+      </form>
 
-</div>
-<div className="Data-Holder">
-    <h2>New Employee</h2>
-
-    <h3>First Name</h3>
-    <form onSubmit={handleAddFormSubmit}>
-<input type="text" name="Firstname" required="required" placeholder="" 
-onChange={handleAddFormChange}/><br></br>
-
-<h3>Last Name</h3>
-<input type="text" name="Lastname" required="required" placeholder="" 
-onChange={handleAddFormChange}/><br></br>
-
-<h3>Email</h3>
-<input type="email" name="email" required="required"  placeholder="" 
-onChange={handleAddFormChange}/><br></br>
-
-<button type="btn">Add Employee</button>
-</form>
       
-    </div>
+      
+<div className="Data-Holder">
+      <h2>New Employee</h2>
 
-    </div>
+      
+    <form className='form' onSubmit={handleAddFormSubmit}>
+
+    <input type="text" name="Fname" required="required" placeholder="First Name" onChange={handleAddFormChange}/>
+   
+    {/* <input type="text" name="Lastname" required="required" placeholder="Last Name" onChange={handleAddFormChange}/> */}
+
+    <input type="text" name="Lname" required="required" placeholder="Last Name" onChange={handleAddFormChange}/>
+   
+    <input type="email" name="email" required="required"  placeholder="Email" onChange={handleAddFormChange}/>
+
+    <button  type="submit">Add Employee</button>
+    </form>
+      
+    
+</div>
+   </div>
   );
-}
+};
 
 
 export default App;
