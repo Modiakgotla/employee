@@ -6,8 +6,12 @@ import AddEmployee from './components/AddEmployee';
 import {nanoid} from 'nanoid';
 import ReadList from './components/ReadList'
 import Edit  from './components/edit';
+import {database, employeeRef} from './config/firebase';
 
+
+import {getDocs,addDoc, updateDoc, deleteDoc, doc, collection} from 'firebase/firestore'; 
 const App =()=> {
+
 
   const [lists,setLists] = useState(data);
   
@@ -50,7 +54,8 @@ const App =()=> {
     };
     const handleAddFormSubmit = (event) => {
       event.preventDefault();
-  
+      
+      const collectionRef = collection(database, "Employee")
 
       const newlist = {
         id:nanoid(),
@@ -58,8 +63,17 @@ const App =()=> {
         Lname:addFormData.Lname,
         email:addFormData.email,
       };
+
+      addDoc(collectionRef,newlist).then(()=>{
+        alert("Employee Added");
+
+      }).catch(()=>{
+        alert("error")
+      });
+
       const newLists= [...lists,newlist];
       setLists(newLists);
+
     };
     const editFormSubmit = (event) =>{
       event.preventDefault();
@@ -103,7 +117,7 @@ const App =()=> {
 
     newLists.splice(index,1);
 
-    setLists(newLists);
+  setLists(newLists);
   }
   return (
     <div className="App">
@@ -142,7 +156,7 @@ const App =()=> {
 
       
       
-<div className="Data-Holder">
+  <div className="Data-Holder">
       <h2>New Employee</h2>
 
       
@@ -160,7 +174,7 @@ const App =()=> {
     </form>
       
     
-</div>
+  </div>
    </div>
   );
 };
